@@ -15,6 +15,7 @@ ul {
 	list-style: none;
 	overflow: hidden;
 	background-color: #333333;
+	margin-bottom: 100px;
 }
 
 li {
@@ -22,6 +23,7 @@ li {
 }
 
 a {
+	text-decoration: none;
 	color: #ff0090;
 	font-family: "Courier New";
 	font-size: 20px;
@@ -35,7 +37,7 @@ a:hover {
 
 footer {
 	padding: auto;
-	margin: 0;
+	margin-top: 100px;
 	padding: 0;
 	width: 100%;
 }
@@ -47,8 +49,9 @@ footer p {
 }
 
 .contents {
+	width: 1000px;
+	margin: auto;
 	background-color: #333333;
-	margin: 100px 240px;
 	height: 100%
 }
 
@@ -65,4 +68,38 @@ footer p {
 	margin: 0;
 	padding-top: 20px; 
 	text-align: center;
+}
+
+.gameTitle {
+	margin: 0;
+	padding: 0;
+}
+
+.gameTitle h1 {
+	text-align: center;
+	color: #ccc;
+}
+
+canvas {
+	margin: auto;
+	padding: 0;
+	display: block;
+	background-color: #101010;
+	border-top: solid #000000 1px;
+	border-bottom: solid #434343 1px;
+	border-right: solid #434343 1px;
+	border-left: solid #000000 1px;
+}
+
+.instructions {
+	margin: 0;
+	padding: 0;
+	padding-left: 100px;
+	padding-right: 100px;
+}
+
+.instructions p {
+	padding-top: 10px;
+
+	color: #ccc;
 }
