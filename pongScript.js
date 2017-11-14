@@ -6,10 +6,10 @@ var color = "#ff0090";
 var cubeWidth = 15;
 var x = (canvas.width - cubeWidth)/2;
 var y = canvas.height/2 - 30;
-var dy = -4;
-var dx = 5;
+var dy = -3;
+var dx = 6;
 //Paddles
-var paddleHeight = 90;
+var paddleHeight = 95;
 var paddleWidth = 13;
 var paddleY = (canvas.height-paddleHeight)/2;
 //Event Listeners
@@ -48,17 +48,19 @@ function start(){
 
 function speedUp(){
 	if(points%5 == 0){
-		if(dx < 0){
-			dx--;
-		}
-		if(dx > 0){
-			dx++;
-		}
 		if(dy < 0){
 			dy--;
 		}
 		if(dy > 0){
 			dy++;
+		}
+	}
+	if(points%10 == 0){
+		if(dx < 0){
+			dx--;
+		}
+		if(dx > 0){
+			dx++;
 		}
 	}
 }
@@ -73,6 +75,10 @@ function drawEnd() {
 	ctx.font = "50px Arial";
 	ctx.fillStyle = color;
 	ctx.fillText("GAME OVER!", canvas.width/2 - 160, canvas.height/2);
+
+	ctx.font = "30px Arial";
+	ctx.fillStyle = color;
+	ctx.fillText("Points: "+points, canvas.width/2 - 60, canvas.height/2 + 50);
 }
 
 function drawStart() {
@@ -82,13 +88,13 @@ function drawStart() {
 }
 
 function drawLives(){
-	ctx.font = "16px Arial"
+	ctx.font = "20px Arial"
 	ctx.fillStyle = color;
-	ctx.fillText("Lives: "+lives, canvas.width-65, 20);
+	ctx.fillText("Lives: "+lives, canvas.width-80, 20);
 }
 
 function drawPoints(){
-	ctx.font = "16px Arial"
+	ctx.font = "20px Arial"
 	ctx.fillStyle = color;
 	ctx.fillText("Points: "+points, 8, 20);
 }

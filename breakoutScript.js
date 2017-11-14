@@ -5,8 +5,8 @@ var color = "#ff0090";
 //Ball
 var x = canvas.width/2;
 var y = canvas.height-30;
-var dx = 4;
-var dy = -5;
+var dx = 5;
+var dy = -6;
 var ballRadius = 10;
 //Paddles
 var paddleHeight = 10;
@@ -87,6 +87,10 @@ function drawEnd() {
 	ctx.font = "50px Arial";
 	ctx.fillStyle = color;
 	ctx.fillText("GAME OVER!", canvas.width/2 - 160, canvas.height/2);
+
+	ctx.font = "30px Arial";
+	ctx.fillStyle = color;
+	ctx.fillText("Points: "+points, canvas.width/2 - 60, canvas.height/2 + 50);
 }
 
 function drawStart() {
@@ -96,13 +100,13 @@ function drawStart() {
 }
 
 function drawLives(){
-	ctx.font = "16px Arial"
+	ctx.font = "20px Arial"
 	ctx.fillStyle = color;
-	ctx.fillText("Lives: "+lives, canvas.width-65, 20);
+	ctx.fillText("Lives: "+lives, canvas.width-80, 20);
 }
 
 function drawPoints(){
-	ctx.font = "16px Arial"
+	ctx.font = "20px Arial"
 	ctx.fillStyle = color;
 	ctx.fillText("Points: "+points, 8, 20);
 }
