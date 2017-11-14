@@ -33,6 +33,22 @@ document.addEventListener("mousemove", mouseMoveHandler, false);
 var lives = 3;
 var points = 0;
 var started = 0;
+var sound = new sound("beep.mp3");
+
+function sound(src) {
+    this.sound = document.createElement("audio");
+    this.sound.src = src;
+    this.sound.setAttribute("preload", "auto");
+    this.sound.setAttribute("controls", "none");
+    this.sound.style.display = "none";
+    document.body.appendChild(this.sound);
+    this.play = function(){
+        this.sound.play();
+    }
+    this.stop = function(){
+        this.sound.pause();
+    }
+}
 
 function mouseMoveHandler(e){
 	var relativeX = e.clientX - canvas.offsetLeft;
@@ -53,6 +69,7 @@ function collisionDetection(){
             	if(x > b.x && x < b.x+brickWidth && y > b.y && y < b.y+brickHeight) {
                 	dy = -dy;
                 	b.status = 0;
+                	sound.play();
                 	points++;
             	}
             }
@@ -137,9 +154,11 @@ function draw(){
 	    drawLives();
 	    collisionDetection();
 		if(y + dy < ballRadius) {
+			sound.play();
 		    dy = -dy;
 		} else if(y + dy > canvas.height-ballRadius){
-			if(x > paddleX && x < paddleX + paddleWidth) {
+			if(x > paddleX - ballRadius && x < paddleX + paddleWidth + ballRadius) {
+				sound.play();
 	        	dy = -dy;
 	    	}
 	    	else {
@@ -162,6 +181,7 @@ function draw(){
 	    	}
 		}
 	    if(x + dx > canvas.width-ballRadius || x + dx < ballRadius) {
+	    	sound.play();
 	    	dx = -dx;
 		}
 	    x += dx;
