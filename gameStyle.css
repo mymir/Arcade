@@ -2,6 +2,7 @@ body {
 	background-color: #101010;
 	margin: 0;
 	padding: 0;
+	 background: radial-gradient(#202020, #000000);
 }
 
 h1, p {
@@ -24,6 +25,7 @@ li {
 
 a {
 	text-decoration: none;
+	text-shadow: 0 0 1px #9800ff;
 	color: #ff0090;
 	font-family: "Courier New";
 	font-size: 20px;
@@ -65,6 +67,8 @@ footer p {
 
 .header h1 {
 	text-shadow: 0 0 3px #d30077;
+	text-shadow: 1px 1px #0011ff;
+	text-shadow: 0 0 5px #9800ff;
 	font-size: 30px;
 	margin: 0;
 	padding-top: 20px; 
@@ -79,6 +83,7 @@ footer p {
 .gameTitle h1 {
 	text-align: center;
 	color: #ccc;
+	text-shadow: 0 0 2px #ff0090;
 }
 
 canvas {
@@ -90,6 +95,7 @@ canvas {
 	border-bottom: solid #434343 1px;
 	border-right: solid #434343 1px;
 	border-left: solid #000000 1px;
+	cursor: none;
 }
 
 .instructions {
