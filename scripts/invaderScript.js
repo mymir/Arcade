@@ -2,29 +2,25 @@
 var canvas = document.getElementById("game");
 var ctx = canvas.getContext("2d");
 var color = "#ff0090";
-//Ball
-var x = canvas.width/2;
-var y = canvas.height-30;
-var dx = 5;
-var dy = -6;
-var ballRadius = 10;
-//Paddles
-var paddleHeight = 10;
-var paddleWidth = 90;
-var paddleX = (canvas.width-paddleWidth)/2;
-//Brick Variables
-var brickRowCount = 5;
-var brickColumnCount = 9;
-var brickWidth = 70;
-var brickHeight = 20;
-var brickPadding = 10;
-var brickOffsetTop = 30;
-var brickOffsetLeft = 30;
-var bricks = [];
-for(c=0; c<brickColumnCount; c++) {
-    bricks[c] = [];
-    for(r=0; r<brickRowCount; r++) {
-        bricks[c][r] = { x: 0, y: 0, status: 1 };
+//Player
+var playerHeight = 20;
+var playerWidth = 30;
+var playerX = (canvas.width-playerWidth)/2;
+//Ships
+var shipRowCount = 5;
+var shipColumnCount = 11;
+var shipWidth = 30;
+var shipHeight = 18;
+var shipPadding = 25;
+var shipOffsetTop = 30;
+var shipOffsetLeft = 30;
+var shipDx = shipWidth + shipPadding;
+var shipDy = shipHeight + shipPadding;
+var ships = [];
+for(c=0; c<shipColumnCount; c++) {
+    ships[c] = [];
+    for(r=0; r<shipRowCount; r++) {
+        ships[c][r] = { x: 0, y: 0, status: 1, width: 30};
     }
 }
 //Event Listeners
@@ -33,7 +29,7 @@ document.addEventListener("mousemove", mouseMoveHandler, false);
 var lives = 3;
 var points = 0;
 var started = 0;
-var sound = new sound("beep.mp3");
+var sound = new sound("resources/beep.mp3");
 
 function sound(src) {
     this.sound = document.createElement("audio");
@@ -127,22 +123,37 @@ function drawPaddle(){
     ctx.closePath();
 }
 
-function drawBricks(){
-	for(c=0; c<brickColumnCount; c++){
-		for(r=0; r<brickRowCount; r++){
-			if(bricks[c][r].status == 1){
-				var brickX = (c*(brickWidth+brickPadding))+brickOffsetLeft;
-	            var brickY = (r*(brickHeight+brickPadding))+brickOffsetTop;
-	            bricks[c][r].x = brickX;
-	            bricks[c][r].y = brickY;
-	            ctx.beginPath();
-	            ctx.rect(brickX, brickY, brickWidth, brickHeight);
-	            ctx.fillStyle = color;
-	            ctx.fill();
-	            ctx.closePath();
-			}
+function drawRow(int) {
+	for(c=0; c<shipColumnCount; c++){
+		if(ships[c][int].status == 1){
+			var shipX = (c*(shipWidth+shipPadding))+shipOffsetLeft;
+	        var shipY = (r*(shipHeight+shipPadding))+shipOffsetTop;
+	        ships[c][r].x = shipX;
+			ships[c][r].y = shipY;
+			ctx.beginPath();
+			ctx.rect(shipX, shipY, shipWidth+(2*r), shipHeight);
+			ctx.fillStyle = color;
+			ctx.fill();
+	        ctx.closePath();
 		}
 	}
+	shipOffsetLeft += shipDx;
+	if(shipOffsetLeft > 130 || shipOffsetLeft < 60){
+		shipDx = -shipDx
+	}
+}
+function drawShips(){
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+	for(c=0; c<shipColumnCount; c++){
+		for(r=0; r<shipRowCount; r++){
+			drawRow(r);
+		}
+	}
+	shipOffsetLeft += shipDx;
+	if(shipOffsetLeft > 130 || shipOffsetLeft < 60){
+		shipDx = -shipDx
+	}
+	// requestAnimationFrame(drawShips);
 }
 
 function draw(){
@@ -201,6 +212,5 @@ function draw(){
 		requestAnimationFrame(draw);
 	}
 }
-draw();
-
+setInterval(drawShips, 1000);
 

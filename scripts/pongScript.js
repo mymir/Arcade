@@ -18,7 +18,7 @@ document.addEventListener("mousemove", mouseMoveHandler, false);
 var lives = 3;
 var points = 0;
 var started = 0;
-var sound = new sound("beep.mp3");
+var sound = new sound("resources/beep.mp3");
 
 function sound(src) {
     this.sound = document.createElement("audio");

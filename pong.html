@@ -2,15 +2,18 @@
 <html>
 <meta charet="UTF-8">
 <head>
-	<link href="gameStyle.css" rel="stylesheet" type="text/css" />
+	<link href="style/gameStyle.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-	<ul>
-		<li><a href="home.html">Home</a></li>
-		<li><a href="about.html">About</a></li>
-		<li><a href="pong.html">Pong</a></li>
-		<li><a href="breakout.html">Breakout</a></li>
-	</ul>
+	<div class="nav">
+		<ul>
+			<li><a href="home.html">Home</a></li>
+			<li><a href="about.html">About</a></li>
+			<li><a href="pong.html">Pong</a></li>
+			<li><a href="breakout.html">Breakout</a></li>
+			<li><a href="invader.html">Invader</a></li>
+		</ul>
+	</div>
 	<div class="contents">
 		<div class="header">
 			<h1>80s Arcade<h1>
@@ -22,12 +25,12 @@
 			<canvas id="game" onclick="start()" height="520" width="780"></canvas>
 		</div>
 		<div class="instructions">
-			<p>Use your mouse hit the ball with the bars to gain points. Click the screen to begin.</p>
+			<p>Use your mouse hit the ball with the bars to gain points. Get 100 points to win. Click the screen to begin.</p>
 		</div>
 	</div>
 	<footer>
 		<p>Brought to you by Rafael Zingle.</p>
 	</footer>
-	<script src="pongScript.js"></script>
+	<script src="scripts/pongScript.js"></script>
 </body>
 </html>
