@@ -69,16 +69,24 @@ function drawWin() {
 	ctx.font = "50px Arial";
 	ctx.fillStyle = color;
 	ctx.fillText("YOU WIN!", canvas.width/2 - 120, canvas.height/2);
+
+	ctx.font = "30px Arial";
+	ctx.fillStyle = color;
+	ctx.fillText("Refresh to play again", canvas.width/2 - 140, canvas.height/2 + 50);
 }
 
 function drawEnd() {
 	ctx.font = "50px Arial";
 	ctx.fillStyle = color;
-	ctx.fillText("GAME OVER!", canvas.width/2 - 160, canvas.height/2);
+	ctx.fillText("GAME OVER!", canvas.width/2 - 160, canvas.height/2 - 20);
 
 	ctx.font = "30px Arial";
 	ctx.fillStyle = color;
-	ctx.fillText("Points: "+points, canvas.width/2 - 60, canvas.height/2 + 50);
+	ctx.fillText("Points: "+points, canvas.width/2 - 60, canvas.height/2 + 30);
+
+	ctx.font = "30px Arial";
+	ctx.fillStyle = color;
+	ctx.fillText("Refresh to play again", canvas.width/2 - 140, canvas.height/2 + 80);
 }
 
 function drawStart() {
@@ -163,7 +171,6 @@ function draw(){
 				if(dy > 0){
 					dy = -dy;
 				}
-				paddleY = (canvas.height-paddleHeight)/2;
 	    	}
 		} else if(x + dx > canvas.width-cubeWidth){
 			if(y > paddleY - cubeWidth && y < paddleY + paddleHeight + cubeWidth) {
@@ -188,7 +195,6 @@ function draw(){
 				if(dy > 0){
 					dy = -dy;
 				}
-				paddleY = (canvas.height-paddleHeight)/2;
 			}
 		}
 	    if(y + dy > canvas.height-cubeWidth || y + dy < cubeWidth) {

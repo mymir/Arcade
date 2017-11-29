@@ -14,13 +14,14 @@ var shipHeight = 18;
 var shipPadding = 25;
 var shipOffsetTop = 30;
 var shipOffsetLeft = 30;
-var shipDx = shipWidth + shipPadding;
+// var shipDx = shipWidth + shipPadding;
+var shipDx = 1;
 var shipDy = shipHeight + shipPadding;
 var ships = [];
 for(c=0; c<shipColumnCount; c++) {
     ships[c] = [];
     for(r=0; r<shipRowCount; r++) {
-        ships[c][r] = { x: 0, y: 0, status: 1, width: 30};
+        ships[c][r] = { x: 0, y: 0, status: 1, width: 30, offLeft: 30};
     }
 }
 //Event Listeners
@@ -30,6 +31,8 @@ var lives = 3;
 var points = 0;
 var started = 0;
 var sound = new sound("resources/beep.mp3");
+
+var test = 4;
 
 function sound(src) {
     this.sound = document.createElement("audio");
@@ -123,37 +126,71 @@ function drawPaddle(){
     ctx.closePath();
 }
 
-function drawRow(int) {
-	for(c=0; c<shipColumnCount; c++){
-		if(ships[c][int].status == 1){
-			var shipX = (c*(shipWidth+shipPadding))+shipOffsetLeft;
-	        var shipY = (r*(shipHeight+shipPadding))+shipOffsetTop;
-	        ships[c][r].x = shipX;
-			ships[c][r].y = shipY;
-			ctx.beginPath();
-			ctx.rect(shipX, shipY, shipWidth+(2*r), shipHeight);
-			ctx.fillStyle = color;
-			ctx.fill();
-	        ctx.closePath();
-		}
-	}
-	shipOffsetLeft += shipDx;
-	if(shipOffsetLeft > 130 || shipOffsetLeft < 60){
-		shipDx = -shipDx
-	}
-}
 function drawShips(){
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
-	for(c=0; c<shipColumnCount; c++){
-		for(r=0; r<shipRowCount; r++){
-			drawRow(r);
+	for(r=0; r<shipRowCount; r++){
+		for(c=0; c<shipColumnCount; c++){
+			if(ships[c][r].status == 1) {
+				ships[c][r].width = 30 + (3*r);
+				// var shipX = (c*(shipWidth+shipPadding))+shipOffsetLeft;
+	   //   	    var shipY = (r*(shipHeight+shipPadding))+shipOffsetTop;
+	  			var shipX = (c*(shipWidth+shipPadding))+(ships[c][r].offLeft);
+	     	    var shipY = (r*(shipHeight+shipPadding))+shipOffsetTop;
+	     	 	ships[c][r].x = shipX;
+				ships[c][r].y = shipY;
+				ctx.beginPath();
+				ctx.rect(shipX, shipY, ships[c][r].width, shipHeight);
+				ctx.fillStyle = color;
+				ctx.fill();
+	     	    ctx.closePath();
+			}
 		}
 	}
-	shipOffsetLeft += shipDx;
-	if(shipOffsetLeft > 130 || shipOffsetLeft < 60){
-		shipDx = -shipDx
+	for(c=0; c<shipColumnCount; c++){
+		ships[c][test].offLeft += shipDx;
+		if(ships[c][test].offLeft > 150 || ships[c][test].offLeft < 30){
+			test--;
+		}
+		if(test == -1){
+			shipDx = -shipDx;
+			test = 4;
+			shipOffsetTop += shipDy;
+		}
 	}
-	// requestAnimationFrame(drawShips);
+	// shipOffsetLeft += shipDx;
+	// if(shipOffsetLeft > 150 || shipOffsetLeft < 30){
+	// // if(shipOffsetLeft > 130 || shipOffsetLeft < 60){
+	// 	shipDx = -shipDx
+	// 	shipOffsetTop += shipDy;
+	// 	test++;
+	// }
+	drawLasers();
+	requestAnimationFrame(drawShips);
+}
+
+function drawLasers() {
+	var first = 4;
+	var down = -shipHeight;
+	for(c=0; c<shipColumnCount; c++){
+		var b = ships[c][first];
+		while(b.status == 0)
+		if(b.status == 0){
+			first--;
+			if(first == -1){
+				b = ships[c][0];
+			} else {
+				b = ships[c][first];
+			}
+		}
+		if(Math.random() < 5) {
+			ctx.beginPath();
+			ctx.rect(b.x - (ship.width/2), b.y - down, 5, 5);
+			ctx.fillStyle = color;
+			ctx.fill();
+			ctx.closePath();
+		}
+	}
+	down--;
 }
 
 function draw(){
@@ -212,5 +249,5 @@ function draw(){
 		requestAnimationFrame(draw);
 	}
 }
-setInterval(drawShips, 1000);
+drawShips();
 
