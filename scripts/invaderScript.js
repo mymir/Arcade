@@ -7,6 +7,8 @@ var playerHeight = 20;
 var playerWidth = 30;
 var playerX = (canvas.width-playerWidth)/2;
 //Ships
+var row = 0;
+var shipJump = shipWidth + shipPadding;
 var shipRowCount = 5;
 var shipColumnCount = 11;
 var shipWidth = 30;
@@ -126,14 +128,28 @@ function drawPaddle(){
     ctx.closePath();
 }
 
+function moveShips(){
+	if(row == shipRowCount){
+		row = 0;
+		// shipOffsetTop += (shipHeight + shipPadding);
+	}
+	if(ships[0][row].offLeft == )){
+
+	}
+	for(c=0; c<shipColumnCount; c++){
+		if(ships[c][row].status == 1){
+	        ships[c][row].offLeft = ships[c][row].offLeft + shipJump;
+		}
+	}
+	row++;
+}
+
 function drawShips(){
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
 	for(r=0; r<shipRowCount; r++){
 		for(c=0; c<shipColumnCount; c++){
 			if(ships[c][r].status == 1) {
 				ships[c][r].width = 30 + (3*r);
-				// var shipX = (c*(shipWidth+shipPadding))+shipOffsetLeft;
-	   //   	    var shipY = (r*(shipHeight+shipPadding))+shipOffsetTop;
 	  			var shipX = (c*(shipWidth+shipPadding))+(ships[c][r].offLeft);
 	     	    var shipY = (r*(shipHeight+shipPadding))+shipOffsetTop;
 	     	 	ships[c][r].x = shipX;
@@ -146,27 +162,51 @@ function drawShips(){
 			}
 		}
 	}
-	for(c=0; c<shipColumnCount; c++){
-		ships[c][test].offLeft += shipDx;
-		if(ships[c][test].offLeft > 150 || ships[c][test].offLeft < 30){
-			test--;
-		}
-		if(test == -1){
-			shipDx = -shipDx;
-			test = 4;
-			shipOffsetTop += shipDy;
-		}
-	}
-	// shipOffsetLeft += shipDx;
-	// if(shipOffsetLeft > 150 || shipOffsetLeft < 30){
-	// // if(shipOffsetLeft > 130 || shipOffsetLeft < 60){
-	// 	shipDx = -shipDx
-	// 	shipOffsetTop += shipDy;
-	// 	test++;
-	// }
-	drawLasers();
+	moveShips();
 	requestAnimationFrame(drawShips);
 }
+
+// function drawShips(){
+// 	ctx.clearRect(0, 0, canvas.width, canvas.height);
+// 	for(r=0; r<shipRowCount; r++){
+// 		for(c=0; c<shipColumnCount; c++){
+// 			if(ships[c][r].status == 1) {
+// 				ships[c][r].width = 30 + (3*r);
+// 			 // var shipX = (c*(shipWidth+shipPadding))+shipOffsetLeft;
+// 	         // var shipY = (r*(shipHeight+shipPadding))+shipOffsetTop;
+// 	  			var shipX = (c*(shipWidth+shipPadding))+(ships[c][r].offLeft);
+// 	     	    var shipY = (r*(shipHeight+shipPadding))+shipOffsetTop;
+// 	     	 	ships[c][r].x = shipX;
+// 				ships[c][r].y = shipY;
+// 				ctx.beginPath();
+// 				ctx.rect(shipX, shipY, ships[c][r].width, shipHeight);
+// 				ctx.fillStyle = color;
+// 				ctx.fill();
+// 	     	    ctx.closePath();
+// 			}
+// 		}
+// 	}
+// 	for(c=0; c<shipColumnCount; c++){
+// 		ships[c][test].offLeft += shipDx;
+// 		if(ships[c][test].offLeft > 150 || ships[c][test].offLeft < 30){
+// 			test--;
+// 		}
+// 		if(test == -1){
+// 			shipDx = -shipDx;
+// 			test = 4;
+// 			shipOffsetTop += shipDy;
+// 		}
+// 	}
+// 	// shipOffsetLeft += shipDx;
+// 	// if(shipOffsetLeft > 150 || shipOffsetLeft < 30){
+// 	// // if(shipOffsetLeft > 130 || shipOffsetLeft < 60){
+// 	// 	shipDx = -shipDx
+// 	// 	shipOffsetTop += shipDy;
+// 	// 	test++;
+// 	// }
+// 	drawLasers();
+// 	requestAnimationFrame(drawShips);
+// }
 
 function drawLasers() {
 	var first = 4;

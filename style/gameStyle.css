@@ -1,8 +1,10 @@
 body {
-	background-color: #101010;
+	/* background-color: #101010; */
 	margin: 0;
 	padding: 0;
 	background: radial-gradient(#202020, #000000);
+	/* background-color: #101010; */
+	background-color: #333333;
 }
 
 h1, p {
@@ -71,7 +73,7 @@ footer p {
 	text-shadow: 0 0 5px #9800ff;
 	font-size: 40px;
 	margin: 0;
-	padding-top: 20px; 
+	padding-top: 20px;
 	text-align: center;
 }
 
